@@ -1,11 +1,9 @@
 package listaSimplesAprimorada;
 
-//Definição da classe Paciente
 class Paciente {
  String nome;
- int urgencia; // Nível de urgência (1 = mais urgente, 5 = menos urgente)
+ int urgencia;
 
- // Construtor
  Paciente(String nome, int urgencia) {
      this.nome = nome;
      this.urgencia = urgencia;
@@ -17,47 +15,39 @@ class Paciente {
  }
 }
 
-//Definição da classe No para a lista encadeada
 class No {
- Paciente paciente; // Dados do paciente
- No proximo; // Referência para o próximo nó
+ Paciente paciente;
+ No proximo; 
 
- // Construtor
  No(Paciente paciente) {
      this.paciente = paciente;
      this.proximo = null;
  }
 }
 
-//Interface Comparator para comparar dois pacientes
 interface Comparator {
  int comparar(Paciente a, Paciente b);
 }
 
-//Implementação de um Comparator para ordenar por urgência (do mais urgente ao menos urgente)
 class ComparadorUrgencia implements Comparator {
  @Override
  public int comparar(Paciente a, Paciente b) {
-     return a.urgencia - b.urgencia; // Ordena do menor (mais urgente) para o maior (menos urgente)
+     return a.urgencia - b.urgencia; 
  }
 }
 
-//Interface Iterator para percorrer os pacientes
 interface Iterator {
- boolean hasNext(); // Verifica se há um próximo paciente
- Paciente next(); // Retorna o próximo paciente
+ boolean hasNext(); 
+ Paciente next(); 
 }
 
-//Classe ListaPrioridade para gerenciar pacientes
 class ListaPrioridade {
- private No inicio; // Referência para o início da lista
+ private No inicio;
 
- // Construtor
  public ListaPrioridade() {
      this.inicio = null;
  }
 
- // Método para inserir um paciente na lista de prioridade
  public void inserir(Paciente paciente) {
      No novoNo = new No(paciente);
      if (inicio == null) {
@@ -69,12 +59,11 @@ class ListaPrioridade {
          }
          atual.proximo = novoNo;
      }
-     ordenar(new ComparadorUrgencia()); // Ordena a lista após inserção
+     ordenar(new ComparadorUrgencia());
  }
 
- // Método para ordenar a lista usando um Comparator
  public void ordenar(Comparator comparator) {
-     if (inicio == null || inicio.proximo == null) return; // Lista vazia ou com apenas um paciente
+     if (inicio == null || inicio.proximo == null) return;
 
      boolean trocou;
      do {
@@ -85,7 +74,6 @@ class ListaPrioridade {
 
          while (proximo != null) {
              if (comparator.comparar(atual.paciente, proximo.paciente) > 0) {
-                 // Troca os pacientes
                  Paciente temp = atual.paciente;
                  atual.paciente = proximo.paciente;
                  proximo.paciente = temp;
@@ -98,12 +86,10 @@ class ListaPrioridade {
      } while (trocou);
  }
 
- // Método para criar um Iterator
  public Iterator iterator() {
      return new IteradorLista();
  }
 
- // Classe interna para o Iterator
  private class IteradorLista implements Iterator {
      private No atual;
 
@@ -127,7 +113,6 @@ class ListaPrioridade {
      }
  }
 
- // Método para imprimir o estado atual da lista
  public void imprimirEstado() {
      No atual = inicio;
      System.out.println("Lista de Pacientes:");
