@@ -1,0 +1,70 @@
+package higeia;
+
+public class Ala {
+	Ala[] ala = new Ala[10];
+    private String nome;
+	private String nomeAla;
+	private int capacidade;
+    
+    public boolean alaCheia() {
+        for (Ala elemento : ala) {
+            if (elemento == null) { 
+                return false;
+            }
+        }
+        return true; 
+    }
+    
+    public void criarAla(String nomeAla, int capacidade) {
+        if (capacidade < 1) {
+            throw new IllegalArgumentException("QUANTIDADE_MINIMA_INVÁLIDA");
+        } if(capacidade > 10) {
+        	throw new IllegalArgumentException("QUANTIDADE_MAXIMA_INVÁLIDA");
+        }
+        
+        this.setNomeAla(nomeAla);
+        
+    }
+
+    public boolean adicionarPaciente(String paciente, int numeroLeito) throws Exception {
+        if (alaCheia()) {
+            throw new Exception("ALA_CHEIA");
+        }
+
+        if (ala[numeroLeito] != null) {
+            throw new Exception("LEITO_OCUPADO");
+        }
+        this.nome = nome;
+        ala = new String[capacidade];
+
+        ala[numeroLeito] = paciente;
+        return true;
+    }
+
+
+    public void removerPaciente(String paciente) {
+        for (int i = 0; i < ala.length; i++) {
+            if (paciente.equals(ala[i])) {
+            	ala[i] = null;
+                return;
+            }
+        }
+    	throw new IllegalArgumentException("PACIENTE_NÃO_ENCONTRADO ");
+    }
+
+    //public void listarPacientes() {
+      //  for (int i = 0; i < ala.length; i++) {
+        //    String status = (ala[i] != null) ? ala[i] : "VAZIO";
+        //    System.out.println((i + 1) + " - " + status);
+        //}
+    //}
+
+	public String getNomeAla() {
+		return nomeAla;
+	}
+
+	public void setNomeAla(String nomeAla) {
+		this.nomeAla = nomeAla;
+	}
+
+}

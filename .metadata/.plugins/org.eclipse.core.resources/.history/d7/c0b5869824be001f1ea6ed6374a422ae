@@ -1,0 +1,31 @@
+package higeia;
+
+public class Exame {
+    private String nome;
+    private String tipo;
+    private String data;
+
+    public Exame(String nome, String tipo, String data) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.data = data;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente, " + nome + ", Exame = " + tipo + ", Data = " + data;
+    }
+}
+

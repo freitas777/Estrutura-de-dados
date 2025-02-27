@@ -1,0 +1,87 @@
+package higeia;
+
+class NoPaciente {
+    private String nome;
+    private NoPaciente proximo;
+    private NoPaciente anterior;
+
+    public NoPaciente(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public NoPaciente getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(NoPaciente proximo) {
+        this.proximo = proximo;
+    }
+
+    public NoPaciente getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(NoPaciente anterior) {
+        this.anterior = anterior;
+    }
+}
+
+public class Triagem {
+    private NoPaciente inicio;
+    private NoPaciente fim;
+
+    public Triagem() {
+        this.inicio = null;
+        this.fim = null;
+    }
+
+    // 2.1 Adicionar Paciente à Triagem
+    public void adicionarPaciente(String nome) {
+        NoPaciente novoPaciente = new NoPaciente(nome);
+        if (inicio == null) { // Se a fila estiver vazia
+            inicio = novoPaciente;
+            fim = novoPaciente;
+        } else {
+            fim.setProximo(novoPaciente);
+            novoPaciente.setAnterior(fim);
+            fim = novoPaciente;
+        }
+    }
+
+    // 2.2 Remover Paciente da Triagem
+    public String removerPaciente() throws Exception {
+        if (inicio == null) {
+            throw new Exception("FILA_VAZIA");
+        }
+
+        String nomeRemovido = inicio.getNome();
+        inicio = inicio.getProximo();
+
+        if (inicio != null) {
+            inicio.setAnterior(null); // Remove referência do nó anterior
+        } else {
+            fim = null; // Se a fila ficou vazia, ajuste o fim também
+        }
+
+        return nomeRemovido;
+    }
+
+    // Listar Pacientes na Fila
+    public void listarPacientes() {
+        if (inicio == null) {
+            System.out.println("Fila de triagem vazia.");
+            return;
+        }
+
+        System.out.println("Pacientes na fila de triagem:");
+        NoPaciente atual = inicio;
+        while (atual != null) {
+            System.out.println("- " + atual.getNome());
+            atual = atual.getProximo();
+        }
+    }
+}

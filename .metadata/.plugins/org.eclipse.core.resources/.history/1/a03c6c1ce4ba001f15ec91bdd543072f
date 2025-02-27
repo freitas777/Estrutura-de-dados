@@ -1,0 +1,83 @@
+package higeia;
+
+public class Exame {
+    private String tipo;
+    private String data;
+    private String resultado;
+
+    public Exame(String tipo, String data, String resultado) {
+        this.tipo = tipo;
+        this.data = data;
+        this.resultado = resultado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    @Override
+    public String toString() {
+        return "Exame: " + tipo + ", Data: " + data + ", Resultado: " + resultado;
+    }
+    
+    package higeia;
+
+    public class Paciente {
+        private String nome;
+        private Exame[] exames; // Pilha de exames
+        private int topo;       // Controla o índice do topo da pilha
+
+        public Paciente(String nome) {
+            this.nome = nome;
+            this.exames = new Exame[10]; // Tamanho fixo inicial (pode ser ajustado)
+            this.topo = -1; // Pilha inicial está vazia
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        // Adicionar exame ao topo da pilha
+        public void adicionarExame(String tipo, String data, String resultado) throws Exception {
+            if (topo == exames.length - 1) {
+                throw new Exception("PILHA_CHEIA");
+            }
+            exames[++topo] = new Exame(tipo, data, resultado);
+        }
+
+        // Visualizar o exame mais recente (sem remover)
+        public Exame visualizarExameMaisRecente() throws Exception {
+            if (topo == -1) {
+                throw new Exception("SEM_EXAMES");
+            }
+            return exames[topo];
+        }
+
+        // Remover exame mais recente
+        public Exame removerExameMaisRecente() throws Exception {
+            if (topo == -1) {
+                throw new Exception("SEM_EXAMES");
+            }
+            return exames[topo--];
+        }
+
+        // Verificar se a pilha está vazia
+        public boolean pilhaVazia() {
+            return topo == -1;
+        }
+
+        // Verificar o número de exames armazenados
+        public int quantidadeExames() {
+            return topo + 1;
+        }
+    }
+
+}

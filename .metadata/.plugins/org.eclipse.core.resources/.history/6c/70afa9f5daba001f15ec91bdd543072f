@@ -1,0 +1,53 @@
+package higeia;
+
+public class Exame {
+	Exame[] exame = new Exame[10];
+    private String paciente;
+    private String tipo;
+    private String data;
+    private int tamanho;
+
+    	@Override
+	    public String toString() {
+	        return "Paciente: " + paciente + "Exame: " + tipo +  "Data: " + data;
+	    }
+
+        public void adicionarExame(String paciente, String tipo, String data) throws Exception {
+            Exame exame = new Exame(paciente, tipo, data);
+    	        if (pilhaVazia()) {
+    	            throw new Exception("SEM_EXAME");
+        }
+        }
+        public boolean pilhaVazia() {
+            if (this.tamanho == -1) {
+                return true;
+            }
+            return false;
+    }
+        
+        public Exame visualizarExameMaisRecente() throws Exception {
+            if (exame.isEmpty()) {
+                throw new Exception("SEM_EXAMES");
+            }
+            return exame.peek();
+        }
+
+        public Exame removerExameMaisRecente() throws Exception {
+            if (exame.isEmpty()) {
+                throw new Exception("SEM_EXAMES");
+            }
+            return exames.pop();
+        }
+    }
+		public String getPaciente() {
+		    return paciente;
+		}
+		
+		public String getTipo() {
+		    return tipo;
+		}
+		
+		public String getData() {
+		    return data;
+}
+}

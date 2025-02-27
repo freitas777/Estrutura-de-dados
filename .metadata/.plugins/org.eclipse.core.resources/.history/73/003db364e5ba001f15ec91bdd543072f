@@ -1,0 +1,87 @@
+package higeia;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        Ala ala = new Ala();
+        Triagem triagem = new Triagem();
+        
+        while (true) {
+            System.out.println("Bem-vindo ao Sistema de Gerenciamento do Hospital!");
+            System.out.println("1. Criar nova Ala");
+            System.out.println("2. Adicionar Paciente em um Leito");
+            System.out.println("3. Remover Paciente de um Leito");
+            System.out.println("4. Adicionar Paciente a Triagem");
+            System.out.println("5. Remover Paciente da Triagem");
+            System.out.println("6. Adicionar Exame");
+            System.out.println("7. Visualizar Exame Mais recente");
+            System.out.println("8. Remover Exame");
+            System.out.println("0. Sair");
+            System.out.print("Escolha uma opção: ");
+            
+            int opcao = scanner.nextInt();
+            scanner.nextLine();  
+            
+                switch (opcao) {
+                    case 1:
+                        System.out.print("Digite o nome da nova Ala: ");
+                        String nomeAla = scanner.nextLine();
+                        System.out.print("Digite a capacidade de leitos da Ala: ");
+                        int capacidade = scanner.nextInt();
+                        ala.criarAla(nomeAla, capacidade);
+                        System.out.println("Ala " + nomeAla + " criada com sucesso.");
+                        break;
+
+                    case 2:
+                        System.out.print("Digite o nome da Ala: ");
+                        String alaParaAdicionar = scanner.nextLine();
+                        System.out.print("Digite o nome do paciente: ");
+                        String nomePaciente = scanner.nextLine();
+                        System.out.print("Digite o número do leito: ");
+                        int numeroLeito = scanner.nextInt();
+                        ala.adicionarPaciente(nomePaciente, numeroLeito);
+                        System.out.println("Paciente " + nomePaciente + " adicionado ao leito " + numeroLeito + " na ala " + alaParaAdicionar);
+                        break;
+
+                    case 3:
+                        System.out.print("Digite o nome da Ala: ");
+                        String alaParaRemover = scanner.nextLine();
+                        System.out.print("Digite o nome do paciente a ser removido: ");
+                        String pacienteRemover = scanner.nextLine();
+                        ala.removerPaciente(pacienteRemover);
+                        System.out.println("Paciente " + pacienteRemover + " removido da ala " + alaParaRemover);
+                        break;
+
+                    case 4:
+                        System.out.print("Digite o nome do paciente a ser inserido na triagem: ");
+                        String pacienteTriagem = scanner.nextLine();
+                        triagem.adicionarPaciente(pacienteTriagem);
+                        System.out.println("Paciente " + pacienteTriagem + " inserido na triagem ");
+                        break;
+                        
+                    case 5:
+                        System.out.print("Digite o nome do paciente a ser removido da triagem: ");
+                        String pacienteRemoverTriagem = scanner.nextLine();
+                        triagem.removerPaciente(pacienteRemoverTriagem);
+                        System.out.println("Paciente " + pacienteRemoverTriagem + " removido da triagem ");
+                        break;
+                        
+                    case 6: 
+                    	System.out.print("Adicionar Exame");
+                        String pacienteRemoverTriagem = scanner.nextLine();
+                    	
+                    //case 0:
+                       // System.out.println("Saindo do sistema...");
+                        //scanner.close();
+                        //return;
+
+                    default:
+                        System.out.println("Opção inválida, tente novamente.");
+                        break;
+                }
+    	}
+    }
+}
+

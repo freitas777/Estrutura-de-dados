@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\lucas\Desktop\Nova pasta (3)\estrutura de dados\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2897859496.index
+1990930725.index

@@ -1,0 +1,82 @@
+package higeia;
+
+class No {
+    private String nome;
+    private No proximo;
+    private No anterior;
+
+    public No(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public No getProximo() {
+        return proximo;
+    }
+
+    public void setProximo(No proximo) {
+        this.proximo = proximo;
+    }
+
+    public No getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(No anterior) {
+        this.anterior = anterior;
+    }
+}
+
+public class Triagem {
+    private No inicio;
+    private No fim;
+
+    public Triagem() {
+        this.inicio = null;
+        this.fim = null;
+    }
+
+    public void adicionarPaciente(String nome) {
+    	No novoPaciente = new No(nome);
+        if (inicio == null) { 
+            inicio = novoPaciente;
+            fim = novoPaciente;
+        } else {
+            fim.setProximo(novoPaciente);
+            novoPaciente.setAnterior(fim);
+            fim = novoPaciente;
+        }
+    }
+
+    public void removerPaciente(String nomeRemovido) throws Exception {
+        if (inicio == null) {
+            throw new Exception("FILA_VAZIA");
+        }
+
+        nomeRemovido = inicio.getNome();
+        inicio = inicio.getProximo();
+
+        if (inicio != null) {
+            inicio.setAnterior(null); 
+        } else {
+            fim = null;
+        }
+    }
+
+    public void listarPaciente() {
+        if (inicio == null) {
+            System.out.println("Fila de triagem vazia.");
+            return;
+        }
+
+        System.out.println("Pacientes na fila de triagem:");
+        No atual = inicio;
+        while (atual != null) {
+            System.out.println("- " + atual.getNome());
+            atual = atual.getProximo();
+        }
+    }
+}

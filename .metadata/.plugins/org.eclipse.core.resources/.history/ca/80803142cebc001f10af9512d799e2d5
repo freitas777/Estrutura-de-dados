@@ -1,0 +1,46 @@
+package higeia;
+
+public class Paciente {
+    private String nome;
+    private Exame[] exames; 
+    private int topo;       
+
+    public Paciente(String nome) {
+        this.nome = nome;
+        this.exames = new Exame[10];
+        this.topo = -1;              
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void adicionarExame(String tipo, String data, String resultado) throws Exception {
+        if (topo == exames.length - 1) {
+            throw new Exception("PILHA_CHEIA");
+        }
+        exames[++topo] = new Exame(tipo, data, resultado);
+    }
+
+    public Exame visualizarExameMaisRecente() throws Exception {
+        if (topo == -1) {
+            throw new Exception("SEM_EXAMES"); 
+        }
+        return exames[topo];
+    }
+
+    public Exame removerExameMaisRecente() throws Exception {
+        if (topo == -1) {
+            throw new Exception("SEM_EXAMES"); 
+        }
+        return exames[topo--];
+    }
+
+    public boolean pilhaVazia() {
+        return topo == -1;
+    }
+
+    public int quantidadeExames() {
+        return topo + 1;
+    }
+}
